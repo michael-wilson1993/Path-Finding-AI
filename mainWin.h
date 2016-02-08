@@ -31,7 +31,7 @@ class mainWin : public QWidget
    Canvas *canvas; 
    QComboBox *obj; 
    QPushButton *next;
-   QPushButton *r, *l, *u, *d;
+   QPushButton *close, *pause, *reset, *d;
 
 
 };

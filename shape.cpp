@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "shape.h"
 
 shape::shape(bool closed)
