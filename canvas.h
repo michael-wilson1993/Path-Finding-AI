@@ -22,16 +22,19 @@ class Canvas : public QWidget
 
    public slots:
    void updatePaint();
+   void startPlayer();
 
   protected:
    void paintEvent(QPaintEvent *);
+   void mouseMoveEvent(QMouseEvent *e);
 
   private:
    Object obj;
    searcher *player;
-   shape *playerShape;
-   
-   std::vector< shape > listOfShapes;
+    std::vector< shape > nonCollisionShapes; // player start, goal
+   shape *playerShape, *goalShape, *startShape; 
+   std::pair< int, int > pl, gl;
+   std::vector< shape > listOfShapes;// shapes on the board
    
 };
 

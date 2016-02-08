@@ -12,7 +12,7 @@ mainWin::mainWin()
    pause = new QPushButton("pause");
    reset = new QPushButton("reset");
 
-   connect(next, SIGNAL(clicked()), this, SLOT(updateSearch()));
+   connect(next, SIGNAL(clicked()), canvas, SLOT(startPlayer()));
    connect(close, SIGNAL(clicked()), this, SLOT(close()));
 
    QGridLayout *layout = new QGridLayout;
@@ -24,6 +24,7 @@ mainWin::mainWin()
 
    timer = new QTimer(this);
    connect(timer, SIGNAL(timeout()), this, SLOT(updateSearch()));
+   timer->start(25);
 }
 
 void mainWin::updateSearch()

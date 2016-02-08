@@ -22,7 +22,10 @@ public:
 	// moves the coordinates for this entire shape in one direction.
 	void move(char dir);
 	// public vector that holds all the coordinates for the vertices.
+
 	std::vector< std::pair< int, int > >  shapePoints;
+
+	void setGlobalCoordinates(int x, int y);
 
 	// returns vertice count
 	int getCount() { return shapePoints.size(); };

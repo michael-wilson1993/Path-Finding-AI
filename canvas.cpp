@@ -4,16 +4,25 @@
 // creates the objects
 Canvas::Canvas(QWidget *parent)
 {
-   
-   player = new searcher(50, 550);
+  
+   pl.first = 50;
+   pl.second = 550;
+   gl.first = 500;
+   gl.second = 100;
+   player = new searcher(pl.first, pl.second, gl.first, gl.second);
+
 
    obj = Text;
- 
-   listOfShapes.push_back(shape(true));
-   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(100,500));
+   
+      listOfShapes.push_back(shape(false));
+   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(pl.first,pl.second));
+
+   listOfShapes.push_back(shape(false));
+   //listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(100,500));
    listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(100,600));
    listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(450,600));
    listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(450,500));
+      listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(100,500));
   
    listOfShapes.push_back(shape(true));
    listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(100,250));
@@ -33,39 +42,61 @@ Canvas::Canvas(QWidget *parent)
    listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(450,125));
    listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(500,210));
 
-   // listOfShapes.push_back(shape(true));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(550,125));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(550,400));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(700,400));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(700,125));
+   listOfShapes.push_back(shape(true));
+   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(550,125));
+   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(550,400));
+   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(700,400));
+   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(700,125));
 
-   // listOfShapes.push_back(shape(true));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(400,400));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(500,550));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(600,475));
+   listOfShapes.push_back(shape(true));
+   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(400,400));
+   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(500,550));
+   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(600,475));
 
-   // listOfShapes.push_back(shape(true));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(725,400));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(675,450));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(675,525));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(725,575));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(775,525));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(775,450));
+   listOfShapes.push_back(shape(true));
+   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(725,400));
+   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(675,450));
+   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(675,525));
+   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(725,575));
+   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(775,525));
+   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(775,450));
 
-   // listOfShapes.push_back(shape(true));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(750,125));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(725,150));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(760,400));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(775,150));
+   listOfShapes.push_back(shape(true));
+   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(750,125));
+   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(725,150));
+   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(760,400));
+   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(775,150));
+
+   listOfShapes.push_back(shape(false));
+   listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(gl.first,gl.second));
+
+
+   nonCollisionShapes.push_back(shape(true));
+   nonCollisionShapes[nonCollisionShapes.size()-1].shapePoints.push_back(std::pair<int, int>(gl.first -7,gl.second-7));
+   nonCollisionShapes[nonCollisionShapes.size()-1].shapePoints.push_back(std::pair<int, int>(gl.first-7,gl.second+7));
+   nonCollisionShapes[nonCollisionShapes.size()-1].shapePoints.push_back(std::pair<int, int>(gl.first+7,gl.second+7));
+   nonCollisionShapes[nonCollisionShapes.size()-1].shapePoints.push_back(std::pair<int, int>(gl.first+7,gl.second-7));
+
+   nonCollisionShapes.push_back(shape(true));
+   nonCollisionShapes[nonCollisionShapes.size()-1].shapePoints.push_back(std::pair<int, int>(pl.first -7,pl.second-7));
+   nonCollisionShapes[nonCollisionShapes.size()-1].shapePoints.push_back(std::pair<int, int>(pl.first-7,pl.second+7));
+   nonCollisionShapes[nonCollisionShapes.size()-1].shapePoints.push_back(std::pair<int, int>(pl.first+7,pl.second+7));
+   nonCollisionShapes[nonCollisionShapes.size()-1].shapePoints.push_back(std::pair<int, int>(pl.first+7,pl.second-7));
+
+
+
+
    
    player->setField(listOfShapes);
    playerShape = player->getShape();
 
 }
-
+void Canvas::startPlayer()
+{
+   player->update();
+}
 void Canvas::updatePaint()
 {  
-   player->update();
    update();
 }
 
@@ -79,7 +110,7 @@ void Canvas::paintEvent(QPaintEvent *event)
    {
    		for(int y = 0 ; y < listOfShapes[x].shapePoints.size()-1; y++ )
    		{
-   			paint.setPen(QPen(Qt::black, 2, Qt::SolidLine));
+         paint.setPen(QPen(Qt::black, 2, Qt::SolidLine));
 	 		paint.drawLine(listOfShapes[x].shapePoints[y].first,
 	 						listOfShapes[x].shapePoints[y].second,
 	 						listOfShapes[x].shapePoints[y+1].first,
@@ -87,7 +118,6 @@ void Canvas::paintEvent(QPaintEvent *event)
    		}
    		if(listOfShapes[x].isConnected())
    		{
-   			paint.setPen(QPen(Qt::black, 2, Qt::SolidLine));
 	 		paint.drawLine(listOfShapes[x].shapePoints[0].first,
 	 						listOfShapes[x].shapePoints[0].second,
 	 						listOfShapes[x].shapePoints[   listOfShapes[x].shapePoints.size()-1		].first,
@@ -95,6 +125,24 @@ void Canvas::paintEvent(QPaintEvent *event)
    		}
    }
 
+   for (int x = 0; x < nonCollisionShapes.size(); x++)
+   {
+         for(int y = 0 ; y < nonCollisionShapes[x].shapePoints.size()-1; y++ )
+         {
+         paint.setPen(QPen(Qt::blue, 2, Qt::SolidLine));
+         paint.drawLine(nonCollisionShapes[x].shapePoints[y].first,
+                     nonCollisionShapes[x].shapePoints[y].second,
+                     nonCollisionShapes[x].shapePoints[y+1].first,
+                     nonCollisionShapes[x].shapePoints[y+1].second);
+         }
+         if(nonCollisionShapes[x].isConnected())
+         {
+         paint.drawLine(nonCollisionShapes[x].shapePoints[0].first,
+                     nonCollisionShapes[x].shapePoints[0].second,
+                     nonCollisionShapes[x].shapePoints[   nonCollisionShapes[x].shapePoints.size()-1     ].first,
+                     nonCollisionShapes[x].shapePoints[   nonCollisionShapes[x].shapePoints.size()-1     ].second);
+         }
+   }
 
          for(int y = 0 ; y < playerShape->shapePoints.size()-1; y++ )
          {
@@ -154,4 +202,16 @@ void Canvas::loadFromFile(QString filename)
 {
 //still to be made. for now input shapes manualy
 	
+}
+
+void Canvas::mouseMoveEvent(QMouseEvent *e)
+{
+    if(e->buttons() == Qt::RightButton)
+    {
+      nonCollisionShapes[1].move('d');
+      pl.second -= 5;
+      //nonCollisionShapes[1].setGlobalCoordinates(e->x(), e->y());
+    }
+   if(e->buttons() == Qt::LeftButton)
+      std::cerr << e->x() << "," << e->y() << std::endl;
 }

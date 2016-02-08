@@ -60,6 +60,17 @@ int shape::ValidMove(std::pair< int, int > st, std::pair< int, int > go) // make
 		return -1;
 	if (found)
 		return 0;
-
-
 }
+
+	void shape::setGlobalCoordinates(int x, int y)
+	{
+		int xdist, ydist;
+		xdist = x - shapePoints[0].first;
+		ydist = y - shapePoints[0].second;
+		for(int x = 0; x < shapePoints.size(); x++)
+		{
+			shapePoints[x].first += xdist;
+			shapePoints[x].second += ydist;
+		}
+
+	}
