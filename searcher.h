@@ -50,12 +50,12 @@ private:
 	//variables
 	int cost;
 	shape *player;
-	std::pair< int, int > start;
-	std::pair< int, int > next;
-	std::pair< int, int > endgoal;
-	// cost per level of the tree, if you get a better one update it.
-	std::vector< int > currentLowCost;
-	int currentBest;
+	std::pair< int, int > start; // coordinate for the start of the search
+	std::pair< int, int > next; // coordinate for the next spot to go to( this is for the animation)
+	std::pair< int, int > endgoal; // coordinate for the goal for the search
+
+	
+	std::vector< int > currentLowCost; // cost per level of the tree, if you get a better one update it.
 	std::vector< std::pair < int, int > > retTemp;
 	std::vector< shape > field;
 	std::vector< std::pair< int, int > >  goalstep;

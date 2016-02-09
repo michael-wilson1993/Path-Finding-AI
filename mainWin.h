@@ -7,33 +7,30 @@
 #include <string>
 #include <QMouseEvent>
 
-
+// QT classes needed for GUI
 class QTimer;
 class Canvas;
-class QComboBox;
 class QPushButton;
 class QGridgeLayout;
 
 class mainWin : public QWidget
 {
 
-   Q_OBJECT
+   Q_OBJECT // needed for QT
 
    public:
+    // constructor that sets up the buttons and connects them accordingly
    mainWin();
-   void getmouse(QMouseEvent *ev);
 
    private slots:
-   void UpdatePlayer();
+   // update player will send a message to canvas telling player to find the shortest path
    void updateSearch(); 
    
   private:
-  QTimer *timer;
-  QTimer *PlayerUpTimer;
-   Canvas *canvas; 
-   QComboBox *obj; 
-   QPushButton *next;
-   QPushButton *close, *pause, *reset, *d;
+   QTimer *timer; // timer making animation possible
+   Canvas *canvas; // canvas is the widget allowing me to draw to the screen
+   QPushButton *next, *close; // next and close buttons
+;
 
 
 };
