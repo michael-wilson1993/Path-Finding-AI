@@ -24,10 +24,12 @@ class mainWin : public QWidget
    void getmouse(QMouseEvent *ev);
 
    private slots:
+   void UpdatePlayer();
    void updateSearch(); 
    
   private:
   QTimer *timer;
+  QTimer *PlayerUpTimer;
    Canvas *canvas; 
    QComboBox *obj; 
    QPushButton *next;

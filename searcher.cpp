@@ -7,18 +7,23 @@ using namespace std;
 struct Point {
 	double x, y;
 };
-
+int gcd(int a, int b)
+{
+	if ( b == 0)
+		return a;
+	return gcd(b, a % b);
+}
 int intersect_line(Point a, Point b, Point c, Point d, Point &p);
 
 searcher::searcher(int x, int y , int gx, int gy)
 {
 	start.first = x;
 	start.second = y;
-	//currentLowCost.push_back(00);
 	endgoal.first = gx;
 	endgoal.second = gy;
 	currLoc = 0;
 	cost = 0;
+	goalsFound = 0;
 	player = new shape(true);
 
 	player->shapePoints.push_back(std::pair<int, int>(x - 2, y - 2));
@@ -26,7 +31,7 @@ searcher::searcher(int x, int y , int gx, int gy)
 	player->shapePoints.push_back(std::pair<int, int>(x + 2, y + 2));
 	player->shapePoints.push_back(std::pair<int, int>(x + 2, y - 2));
 
-	goalstep.push_back(start);
+	goalstep.push_back(std::pair< int, int > (start.first, start.second));
 
 	next = goalstep[currLoc];
 
@@ -34,27 +39,32 @@ searcher::searcher(int x, int y , int gx, int gy)
 
 }
 
+void searcher::reset(int x, int y, int gx, int gy)
+{
+	start.first = x;
+	start.second = y;
+	endgoal.first = gx;
+	endgoal.second = gy;
+	goalstep[0].first = x;
+	goalstep[0].second = y;
+	player->setGlobalCoordinates(start.first, start.second);
+}
+
+void searcher::startPlayer()
+{
+	int cur = 0;
+	std::vector< std::pair < int, int > > temp;
+	node t = AstarSearch(start, endgoal, cur, cost, temp);
+	if(t.GoalFound == true)
+	goalstep = t.best;
+	std::reverse(goalstep.begin(), goalstep.end());
+}
 void searcher::setField(std::vector< shape > setter)
 {
 	field = setter;
 	for (int x = 0; x < field.size(); x++)
 		vertCount += field[x].getCount();
 	std::vector< std::pair < int, int > > temp;
-
-	int cur = 0;
-	node t = AstarSearch(start, endgoal, cur, cost, temp);
-	cout << endl << t.cost << endl << endl;
-	goalstep = t.best;
-	/*goalstep.push_back(start);*/
-	//goalstep = retTemp;
-	//goalstep.push_back(start);
-	std::reverse(goalstep.begin(), goalstep.end());
-	//std::cerr << t << std::endl;
-
-	for (int x = 0; x < goalstep.size(); x++)
-	{
-		std::cerr << goalstep[x].first << "," << goalstep[x].second << std::endl;
-	}
 }
 
 void searcher::update()
@@ -63,32 +73,34 @@ void searcher::update()
 	if (start != goalstep[goalstep.size() - 1])
 	{
 
+		
 		if (start.first < next.first)
 		{
 			player->move('r');
-			start.first += 5;
+			start.first += 1;
 		}
 		else if (start.first > next.first)
 		{
 			player->move('l');
-			start.first -= 5;
+			start.first -= 1;
 		}
 
 		if (start.second > next.second)
 		{
 			player->move('u');
-			start.second -= 5;
+			start.second -= 1;
 		}
 		else if (start.second < next.second)
 		{
 			player->move('d');
-			start.second += 5;
+			start.second += 1;
 		}
 		if (start == goalstep[currLoc])
 		{
 			currLoc++;
 			next = goalstep[currLoc];
 		}
+		
 	}
 
 }
@@ -114,7 +126,7 @@ int searcher::pickclosestCoor(shape p)
 node searcher::AstarSearch(std::pair < int, int > currState, std::pair < int, int > goalState, int currentState, double cost, std::vector< std::pair < int, int >  > visited)
 {
 	visited.push_back(currState);
-
+	std::cerr << currState.first;
 	bool firstFlag = false;
 	node adder;
 	adder.GoalFound = false;
@@ -126,6 +138,7 @@ node searcher::AstarSearch(std::pair < int, int > currState, std::pair < int, in
 		adder.best.push_back(currState);
 		adder.noMoreOptions = false;
 		adder.GoalFound = true;
+		goalsFound++;
 		cout << "found end here!!!!" << endl;
 		return adder;
 	}
@@ -135,7 +148,7 @@ node searcher::AstarSearch(std::pair < int, int > currState, std::pair < int, in
 	{
 		for (int y = 0; y < field[x].shapePoints.size(); y++)
 		{
-			if (!visitedCheck(visited, field[x].shapePoints[y]) && validMove(field[x].shapePoints[y], currState))
+			if (!visitedCheck(visited, field[x].shapePoints[y]) && validMove(currState, field[x].shapePoints[y]))
 			{
 
 				node temp = AstarSearch(field[x].shapePoints[y], goalState, currentState, cost + dist(currState, field[x].shapePoints[y]), visited);
@@ -155,6 +168,7 @@ node searcher::AstarSearch(std::pair < int, int > currState, std::pair < int, in
 
 
 	adder.best.push_back(currState);
+	std::cerr << endl << endl << goalsFound << endl << endl;
 	return adder;
 
 }
@@ -174,59 +188,57 @@ bool searcher::validMove(std::pair< int, int > st, std::pair < int, int> go)
 	{
 		for(int x = 0; x < field.size() ;x++)
 		{
-
 			for(int y = 0 ; y < field[x].shapePoints.size()-1; y++)
 			{
-				if(go != field[x].shapePoints[y] && go != field[x].shapePoints[y + 1] && st != field[x].shapePoints[y] && st != field[x].shapePoints[y+1])
+				if((go != field[x].shapePoints[y] && go != field[x].shapePoints[y + 1] && st != field[x].shapePoints[y] && st != field[x].shapePoints[y+1]))
 					if (true == intersect(st, go, field[x].shapePoints[y], field[x].shapePoints[y + 1]))
 						return false;
 			}
-			if(go != field[x].shapePoints[0] && go != field[x].shapePoints[field[x].shapePoints.size()-1])
+			if((go != field[x].shapePoints[0] && go != field[x].shapePoints[field[x].shapePoints.size()-1] && st != field[x].shapePoints[0] && st != field[x].shapePoints[field[x].shapePoints.size()-1]))
 				if(true == intersect(st, go, field[x].shapePoints[0], field[x].shapePoints[field[x].shapePoints.size()-1]))
 					return false;
-			
 		}
 	}
 	return true;
 
 }
 // returns true if there was a intersection. 
-		bool searcher::intersect(std::pair< int, int > aa, std::pair< int, int > bb, std::pair< int, int > cc, std::pair< int, int > dd)
-		{
+bool searcher::intersect(std::pair< int, int > aa, std::pair< int, int > bb, std::pair< int, int > cc, std::pair< int, int > dd)
+{
 
 
-			Point a, b, c, d;
-			a.x = aa.first;
-			a.y = aa.second;
+	Point a, b, c, d;
+	a.x = aa.first;
+	a.y = aa.second;
 
-			b.x = bb.first;
-			b.y = bb.second;
+	b.x = bb.first;
+	b.y = bb.second;
 
-			c.x = cc.first;
-			c.y = cc.second;
+	c.x = cc.first;
+	c.y = cc.second;
 
-			d.x = dd.first;
-			d.y = dd.second;
+	d.x = dd.first;
+	d.y = dd.second;
 
-			Point temp;
+	Point temp;
 
-			if (intersect_line(a, b, c, d, temp) == 1 || intersect_line(a, b, c, d, temp) == -1)
-			{
-				return true;
+	if (intersect_line(a, b, c, d, temp) == 1 || intersect_line(a, b, c, d, temp) == -1)
+	{
+		return true;
 
-			}
-			return false;
-		}
+	}
+	return false;
+}
 
-		int searcher::dist(std::pair< int, int > aa, std::pair< int, int > bb)
-		{
-			int d1 = aa.first - bb.first;
-			int d2 = aa.second - bb.second;
-			int r1, r2;
-			r1 = d1 * d1;
-			r2 = d2 * d2;
-			return r1 + r2;
-		}
+float searcher::dist(std::pair< int, int > aa, std::pair< int, int > bb)
+{
+	int d1 = aa.first - bb.first;
+	int d2 = aa.second - bb.second;
+	int r1, r2;
+	r1 = d1 * d1;
+	r2 = d2 * d2;
+	return std::sqrt(r1 + r2);
+}
 
 /*
 * 2-D Line Intersection
@@ -333,18 +345,6 @@ bool searcher::visitedCheck(std::vector< std::pair< int, int > > list, std::pair
 	}
 	return false;
 }
-
-//bool searcher::VisitedAll(std::vector < std::pair< int, int > >listOfPairs, std::vector< shape > shapeList)
-//{
-//	for (int x = 0; x < shapeList.size(); x++)
-//	{
-//		for (int y = 0; y < shapeList[x].shapePoints.size(); y++)
-//		{
-//			(!visitedCheck(listOfPairs, shapeList[x].shapePoints[y]))
-//		}
-//	}
-//
-//}
 
 int searcher::currentshape(std::pair < int, int> p)
 {

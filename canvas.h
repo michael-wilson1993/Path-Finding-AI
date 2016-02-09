@@ -19,10 +19,11 @@ class Canvas : public QWidget
    enum Object { Line, Rect, RoundRect, Ellipse, Text };
    Canvas(QWidget *parent = 0);
    void loadFromFile(QString filename);
-
+    void startPlayer();
    public slots:
    void updatePaint();
-   void startPlayer();
+   void StartSearch();
+
 
   protected:
    void paintEvent(QPaintEvent *);
@@ -34,6 +35,7 @@ class Canvas : public QWidget
     std::vector< shape > nonCollisionShapes; // player start, goal
    shape *playerShape, *goalShape, *startShape; 
    std::pair< int, int > pl, gl;
+   std::vector< std::pair< int, int > > path;
    std::vector< shape > listOfShapes;// shapes on the board
    
 };

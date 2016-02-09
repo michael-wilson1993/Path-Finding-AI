@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'canvas.h'
 **
-** Created: Mon Feb 8 14:20:47 2016
+** Created: Mon Feb 8 18:53:19 2016
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -38,7 +38,7 @@ static const uint qt_meta_data_Canvas[] = {
 };
 
 static const char qt_meta_stringdata_Canvas[] = {
-    "Canvas\0\0updatePaint()\0startPlayer()\0"
+    "Canvas\0\0updatePaint()\0StartSearch()\0"
 };
 
 const QMetaObject Canvas::staticMetaObject = {
@@ -71,7 +71,7 @@ int Canvas::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: updatePaint(); break;
-        case 1: startPlayer(); break;
+        case 1: StartSearch(); break;
         default: ;
         }
         _id -= 2;
