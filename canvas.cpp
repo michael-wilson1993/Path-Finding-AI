@@ -11,11 +11,9 @@ Canvas::Canvas(QWidget *parent)
    gl.second = 100;
    player = new searcher(pl.first, pl.second, gl.first, gl.second);
 
-
    obj = Text;
+   /*took out a few objects because it take to long with those objects*/
    
-
-
    // listOfShapes.push_back(shape(true));
    // //listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(100,500));
    // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(100,600));
@@ -47,10 +45,10 @@ Canvas::Canvas(QWidget *parent)
    listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(700,400));
    listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(700,125));
 
-   // listOfShapes.push_back(shape(true));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(400,400));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(500,550));
-   // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(600,475));
+   //listOfShapes.push_back(shape(true));
+    //listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(400,400));
+    //listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(500,550));
+    //listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(600,475));
 
    // listOfShapes.push_back(shape(true));
    // listOfShapes[listOfShapes.size()-1].shapePoints.push_back(std::pair<int, int>(725,400));
@@ -82,19 +80,11 @@ Canvas::Canvas(QWidget *parent)
    nonCollisionShapes[nonCollisionShapes.size()-1].shapePoints.push_back(std::pair<int, int>(pl.first+7,pl.second+7));
    nonCollisionShapes[nonCollisionShapes.size()-1].shapePoints.push_back(std::pair<int, int>(pl.first+7,pl.second-7));
 
-
-
-
-   
    player->setField(listOfShapes);
-
    playerShape = player->getShape();
 
 }
-void Canvas::startPlayer()
-{
-   
-}
+
 void Canvas::updatePaint()
 {  
    player->update();
@@ -171,39 +161,7 @@ void Canvas::paintEvent(QPaintEvent *event)
                      path[x+1].second);
 
          }
-
-
-   /*
-   QRect rect(0,0,200,200);
-   QLinearGradient lg(0,0,200,200); 
-   switch(obj)
-   {
-      case Line:
-	 paint.setPen(QPen(Qt::black, 2, Qt::SolidLine));
-	 paint.drawLine(10,10,1000,700);
-	 break;
-      case Rect:
-	 //paint.setRenderHint(QPainter::Antialiasing, true); 
-	 paint.setBrush(QBrush(Qt::red, Qt::SolidPattern));
-	 paint.drawRect(rect);
-	 break; 
-      case RoundRect:
-	 paint.setPen(QPen(Qt::blue, 3, Qt::DashDotLine));
-	 paint.setBrush(QBrush(Qt::darkMagenta, Qt::DiagCrossPattern)); 
-	 paint.drawRoundRect(rect, 25, 25);
-	 break; 
-      case Ellipse:
-	 //paint.setRenderHint(QPainter::Antialiasing, true); 
-	 lg.setColorAt(0.0, Qt::white);
-	 lg.setColorAt(0.2, Qt::green);
-	 lg.setColorAt(1.0, Qt::black);
-	 paint.setBrush(lg); 
-	 paint.drawEllipse(rect);
-	 break; 
-      case Text:
-	 paint.drawText(rect, Qt::AlignCenter, "Select an Object"); 
-   }
-   */
+  
 }
 
 

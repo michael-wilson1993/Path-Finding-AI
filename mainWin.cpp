@@ -28,7 +28,7 @@ mainWin::mainWin()
    PlayerUpTimer = new QTimer(this);
   // connect(PlayerUpTimer, SIGNAL(timeout()), this, SLOT(UpdatePlayer()));
    connect(timer, SIGNAL(timeout()), this, SLOT(updateSearch()));
-   timer->start(100);
+   timer->start(10);
 }
 
 void mainWin::updateSearch()
@@ -41,6 +41,6 @@ void mainWin::updateSearch()
 void mainWin::UpdatePlayer()
 {
    PlayerUpTimer->start(25);
-   canvas->startPlayer();
+   //canvas->startPlayer();
 
 }
