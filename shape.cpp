@@ -1,3 +1,12 @@
+/*
+	- author: Michael Wilson
+	- prof: Yllias Chali
+	- school class: Artificial Intelligence 
+	- class: shape
+	- description ** contains all the vertices to make up a shape **
+	- Assignment 1
+*/
+
 #include "shape.h"
 
 shape::shape(bool closed)
@@ -53,38 +62,6 @@ int shape::ValidMove(std::pair< int, int > st, std::pair< int, int > go) // make
 		}
 	}
 	return -1;
-
-
-	// bool found = false;
-	// int location = 0;
-	// for (int x = 0; x < shapePoints.size(); x++)
-	// {
-	// 	if (shapePoints[x] == go)
-	// 	{
-	// 		found = true;
-	// 		location = x;
-	// 	}
-	// }
-
-	// if (location == 0)
-	// {
-	// 	if (shapePoints[location + 1] == st || shapePoints[shapePoints.size() - 1] == st)
-	// 		return 1;
-	// }
-	// else if (location == shapePoints.size()-1)
-	// {
-	// 	if (shapePoints[shapePoints.size()-2] == st || shapePoints[0] == st)
-	// 		return 1;
-	// }
-	// else
-	// {
-	// 	if (shapePoints[location + 1] == st || shapePoints[location - 1] == st)
-	// 		return 1;
-	// }
-	// if (!found)
-	// 	return -11;
-	// if (found)
-	// 	return 0;
 }
 
 	void shape::setGlobalCoordinates(int x, int y)

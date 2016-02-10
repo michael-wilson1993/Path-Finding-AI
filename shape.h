@@ -1,3 +1,12 @@
+/*
+	- author: Michael Wilson
+	- prof: Yllias Chali
+	- school class: Artificial Intelligence 
+	- class: shape
+	- description ** contains all the vertices to make up a shape **
+	- Assignment 1
+*/
+
 
 #ifndef SHAPE_H
 #define SHAPE_H
@@ -22,9 +31,8 @@ public:
 	// moves the coordinates for this entire shape in one direction.
 	void move(char dir);
 	// public vector that holds all the coordinates for the vertices.
-
 	std::vector< std::pair< int, int > >  shapePoints;
-
+	// moves all the coordinate to x, and y; (used to move goal and start around)
 	void setGlobalCoordinates(int x, int y);
 
 	// returns vertice count
@@ -34,6 +42,7 @@ public:
 
 
 private:
+	// connectShape if true it will connect the first and last vertices - else it wont connect those vertices
 	bool connectShape;
 
 

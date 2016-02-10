@@ -1,3 +1,12 @@
+/*
+   - author: Michael Wilson
+   - prof: Yllias Chali
+   - school class: Artificial Intelligence 
+   - class: canvas 
+   - description ** widget that we can draw on **
+   - Assignment 1
+*/
+
 #include<QtGui>
 #include "canvas.h"
 

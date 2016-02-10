@@ -1,3 +1,12 @@
+/*
+   - author: Michael Wilson
+   - prof: Yllias Chali
+   - school class: Artificial Intelligence 
+   - class: mainWin 
+   - description ** main window the contains the canvas to draw to **
+   - Assignment 1
+*/
+
 #ifndef MAINWIN_H
 #define MAINWIN_H
 
@@ -10,6 +19,7 @@
 // QT classes needed for GUI
 class QTimer;
 class Canvas;
+class QLabel;
 class QPushButton;
 class QGridgeLayout;
 
@@ -29,7 +39,8 @@ class mainWin : public QWidget
   private:
    QTimer *timer; // timer making animation possible
    Canvas *canvas; // canvas is the widget allowing me to draw to the screen
-   QPushButton *next, *close; // next and close buttons
+   QPushButton *next, *close, *inst, *inst2; // next and close buttons
+
 ;
 
 

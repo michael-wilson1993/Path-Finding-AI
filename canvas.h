@@ -1,3 +1,11 @@
+/*
+   - author: Michael Wilson
+   - prof: Yllias Chali
+   - school class: Artificial Intelligence 
+   - class: canvas 
+   - description ** widget that we can draw on **
+   - Assignment 1
+*/
 
 #ifndef CANVAS_H
 #define CANVAS_H
